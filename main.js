@@ -11,13 +11,8 @@ function getComputerChoice() {
     }
 }
 
-const computerSelection = getComputerChoice();
-console.log("> Computer has chosen " + computerSelection);
-
-
 function getHumanChoice() {
     const humanChoice = prompt("Enter Your Weapon: ").toLowerCase();
-
     switch (humanChoice) {
         case "rock":
             return "Rock";
@@ -30,5 +25,33 @@ function getHumanChoice() {
     }    
 }
 
-const humanSelection = getHumanChoice();
+function playRound(humanChoice, computerChoice) {
+    if ((humanChoice == "rock" && computerChoice == "paper") || (humanChoice == "paper" && computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "rock")) 
+    {
+        alert("YOU LOSE!")
+        computerScore++; 
+    }
+
+    if ((computerChoice == "rock" && humanChoice == "paper") || (computerChoice == "paper" && humanChoice == "scissors") || (computerChoice == "scissors" && humanChoice == "rock")) 
+    {
+        alert("YOU WIN!")
+        humanScore++; 
+    }    
+
+    if(computerChoice == humanChoice)
+    {
+        alert("IT'S A TIE!")
+    }
+}
+
+
+let humanScore    = 0;
+let computerScore = 0;
+
+const computerSelection = getComputerChoice();
+const humanSelection    = getHumanChoice();
+
+console.log("> Computer has chosen " + computerSelection);
 console.log("> Human has chosen " + humanSelection);
+
+
