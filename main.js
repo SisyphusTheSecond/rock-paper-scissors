@@ -25,19 +25,22 @@ function getHumanChoice() {
     }    
 }
 
+let humanScore    = 0;
+let computerScore = 0;
+
 function playRound(humanChoice, computerChoice) {
 
     if(humanChoice == "Wrong Weapon") {
-        console.log("Invalid input. Please choose Rock, Paper, or Scissors.")
+        gameMessages.innerHTML += "<p>Invalid input. Please choose Rock, Paper, or Scissors.</p>";
         return false;
     }
 
-    console.log("> Computer has chosen " + computerChoice);
-    console.log("> Human has chosen " + humanChoice);
+    gameMessages.innerHTML += "<p>Computer has chosen " + computerChoice + "</p>";
+    gameMessages.innerHTML += "<p>Human has chosen " + humanChoice + "</p>";
 
     if(computerChoice === humanChoice) {
 
-        console.log("It's a Tie!")
+        gameMessages.innerHTML += "<p>It's a Tie!</p>";
 
     } else if (
         (humanChoice === "Rock" && computerChoice === "Paper") || 
@@ -57,27 +60,32 @@ function playRound(humanChoice, computerChoice) {
     return true;
 }
 
-let humanScore    = 0;
-let computerScore = 0;
-
 function playGame() {
+    let roundNumber = 1;
+    const gameMessages = document.getElementById('gameMessages');
+    gameMessages.innerHTML = "";
+
     while(humanScore < 5 && computerScore < 5) {
+
+        gameMessages.innerHTML += "<p>Round " + roundNumber + "</p>";
 
         const computerSelection = getComputerChoice();
         const humanSelection    = getHumanChoice();
 
         const validRound = playRound(humanSelection, computerSelection);
         if(validRound) {
-            console.log("Score: Human " + humanScore + " - Computer " + computerScore);
+            gameMessages.innerHTML += "<p>Score: Human " + humanScore + " - Computer " + computerScore + "</p>";
         }
+
+        roundNumber++;
     }
 
     if(humanScore === 5) {
-        console.log("Congratulations! You won the game!");
+        gameMessages.innerHTML += "<p>Congratulations! You won the game!</p>";
     } else {
-        console.log("You Lost to a Bloody Machine! ~ SAD ~");
+        gameMessages.innerHTML += "<p>You Lost to a Bloody Machine! ~ SAD ~</p>";
     }
 }
 
-playGame();
+document.getElementById('startButton').addEventListener('click', playGame);
 
